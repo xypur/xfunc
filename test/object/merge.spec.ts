@@ -6,9 +6,9 @@ describe('merge', () => {
     const result = merge(null, null)
     expect(result).toBeNull()
     const result2 = merge(0, null)
-    expect(result2).toBeUndefined()
+    expect(result2).toBe(0)
     const result3 = merge('hi', null)
-    expect(result3).toBeNull()
+    expect(result3).toBe('hi')
     const target4 = {}
     const result4 = merge(target4, null)
     expect(result4).toBe(target4)
