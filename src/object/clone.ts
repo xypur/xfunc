@@ -17,21 +17,14 @@ const promiseTag = '[object Promise]'
 const generatorTag = '[object Generator]'
 
 // 不可克隆的类型（浅克隆也保持原引用）
-const UNCLONABLE_TYPES = new Set([
-  weakMapTag, 
-  weakSetTag, 
-  weakRefTag, 
-  functionTag, 
-  promiseTag, 
-  generatorTag
-])
+const UNCLONABLE_TYPES = new Set([weakMapTag, weakSetTag, weakRefTag, functionTag, promiseTag, generatorTag])
 
 /**
  * 浅克隆一个值
  * @param value 要克隆的值
  * @returns 浅克隆后的值
  */
-export function shallowClone<T>(value: T): T {
+export function clone<T>(value: T): T {
   // 1. 处理原始类型
   if (!isObject(value)) {
     return value

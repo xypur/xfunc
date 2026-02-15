@@ -1,4 +1,4 @@
-import { hasOwnProperty } from '../internal'
+import { hasOwnProperty } from '../internal/constants'
 
 /**
  * Checks if an object has a specific own property.

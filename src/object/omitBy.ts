@@ -1,6 +1,6 @@
 import { isNil } from '../typed/isNil'
 import { Key } from '../internal/interfaces'
-import { baseOmitBy } from '../internal'
+import { baseOmitBy } from '../internal/baseOmitBy'
 
 /**
  * Creates a new object by omitting key-value pairs where the callback returns true.

@@ -1,6 +1,6 @@
 import { isNil } from '../typed/isNil'
 import { Key } from '../internal/interfaces'
-import { basePickBy } from '../internal'
+import { basePickBy } from '../internal/basePickBy'
 
 /**
  * Creates a new object by picking only the specified keys from the source object.

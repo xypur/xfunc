@@ -1,4 +1,4 @@
-import { ObjectToString } from '../internal'
+import { ObjectToString } from '../internal/constants'
 
 /**
  * Gets the raw type of a value by extracting it from Object.prototype.toString result.

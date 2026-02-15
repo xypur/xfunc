@@ -113,7 +113,7 @@ function initTypeObject(value: any): any {
   }
 }
 
-export function baseClone<T>(value: T, count?: { value: number }): T {
+export function cloneDeep<T>(value: T): T {
   // 处理原始类型
   if (!isObject(value)) return value
   
@@ -128,15 +128,11 @@ export function baseClone<T>(value: T, count?: { value: number }): T {
   const stack: Array<[any, any]> = [[value, root]]
   
   while (stack.length) {
-    count && (count.value += 1)
-    
     const [source, copy] = stack.pop()! // 使用 pop 而不是 shift 提高性能
     const tag = toTypeString(source)
     
     // 跳过不可克隆类型
-    if (UNCLONABLE_TYPES.has(tag)) {
-      continue
-    }
+    if (UNCLONABLE_TYPES.has(tag)) continue
     
     // 处理 Map 和 Set
     if (tag === mapTag || tag === setTag) {
