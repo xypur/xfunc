@@ -1,0 +1,51 @@
+// Folder-specific settings
+//
+// For a full list of overridable settings, and general information on folder-specific settings,
+// see the documentation: https://zed.dev/docs/configuring-zed#settings-files
+{
+  // 关闭默认的保存格式化
+  "format_on_save": "off",
+
+  // 为需要 ESLint 验证的语言配置
+  "languages": {
+    "JavaScript": {
+      "tab_size": 2,
+      "formatter": [],
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "TypeScript": {
+      "tab_size": 2,
+      "formatter": [],
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "TSX": {
+      "tab_size": 2,
+      "formatter": [],
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    }
+  },
+
+  // ESLint 语言服务器配置
+  "lsp": {
+    "eslint": {
+      "settings": {
+        "codeActionOnSave": {
+          "enable": true,
+          "mode": "all" // 相当于 VSCode 的 "explicit"
+        },
+        "validate": {
+          "javascript": true,
+          "javascriptreact": true,
+          "typescript": true,
+          "typescriptreact": true
+        }
+      }
+    }
+  }
+}

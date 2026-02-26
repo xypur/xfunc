@@ -11,17 +11,18 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const distDir = path.resolve(__dirname, '../dist')
-const resolve = (p: string) => path.resolve(distDir, p)
+const resolve = p => path.resolve(distDir, p)
 const argv = minimist(process.argv.slice(2))
 
 main(argv)
 
 async function main(argv: minimist.ParsedArgs) {
   // 读取根目录 package.json 获取默认版本
-  const rootPackagePath = resolve('../package.json')
+  const rootPackagePath = path.resolve(__dirname, '../package.json')
   const rootPackage = JSON.parse(await fs.readFile(rootPackagePath, 'utf-8'))
   const { v: version = rootPackage.version } = argv
   const packageJson = createPackageConfig(version)
+
   try {
     console.log(pc.dim('Building TypeScript...'))
     const tscResult = await execaQuiet('tsc')
@@ -31,6 +32,7 @@ async function main(argv: minimist.ParsedArgs) {
     }
 
     console.log(pc.dim('Building bundles...'))
+
     // 并行执行所有 rollup 构建
     const esmResult = await execaQuiet('tsdown')
     // const umdResult = await execaQuiet('BUILD_ENV=umd tsdown', { shell: true })
@@ -51,21 +53,25 @@ async function main(argv: minimist.ParsedArgs) {
     // 格式化打包后的代码和类型文件
     console.log(pc.dim('Formatting output files...'))
     try {
-      await execa('pnpm', [
-        'exec',
-        'eslint',
-        'dist/**/*.{js,ts,d.ts}',
-        '--fix',
-        '--no-ignore'
-      ], { stdio: 'inherit' })
+      await execa(
+        'pnpm',
+        ['exec', 'eslint', 'dist/**/*.{js,ts,d.ts}', '--fix', '--no-ignore'],
+        { stdio: 'inherit' }
+      )
       console.log(pc.green('✓') + pc.dim(' Files formatted successfully!'))
-    } catch(error) {
-      console.log(pc.yellow('(!)') + pc.dim(' Warning: Some files could not be formatted: ') + pc.red(error.message))
+    } catch(error: any) {
+      console.log(
+        pc.yellow('(!)')
+        + pc.dim(' Warning: Some files could not be formatted: ')
+        + pc.red(error.message)
+      )
     }
 
     console.log(pc.green('✓') + pc.bold(' Build completed successfully!'))
   } catch(error: any) {
-    console.error(pc.red('✗') + pc.bold(' Build failed: ') + pc.red(error.message))
+    console.error(
+      pc.red('✗') + pc.bold(' Build failed: ') + pc.red(error.message)
+    )
     if (error.stderr) {
       console.error(pc.red('STDERR:'), error.stderr)
     }
