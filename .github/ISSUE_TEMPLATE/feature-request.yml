@@ -1,0 +1,35 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+title: '[Feature]: '
+labels: ['enhancement']
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: A clear and concise description of the feature
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Use Case
+      description: Describe the problem this feature would solve or the use case it addresses
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Proposed API
+      description: What would the API look like? (function signature, example usage)
+      placeholder: |
+        ```ts
+        function myUtil(input: string): string
+        // usage
+        myUtil('foo') // => 'bar'
+        ```
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and this feature has not been requested
+          required: true
+        - label: This feature aligns with xfunc's zero-dependency philosophy
+          required: true

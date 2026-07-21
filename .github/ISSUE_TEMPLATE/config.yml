@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://uphg.github.io/xfunc/
+    about: Read the API reference and usage guides
+  - name: Discussions
+    url: https://github.com/uphg/xfunc/discussions
+    about: Ask questions and discuss ideas here

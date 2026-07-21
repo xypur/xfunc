@@ -15,7 +15,7 @@ jobs:
   size-report:
     runs-on: ubuntu-latest
     if: >
-      github.repository == 'uphg/xfunc' &&
+      github.repository == 'xypur/xfunc' &&
       github.event.workflow_run.event == 'pull_request' &&
       github.event.workflow_run.conclusion == 'success'
     steps:
@@ -34,7 +34,7 @@ jobs:
         run: pnpm install
 
       - name: Download Size Data
-        uses: dawidd6/action-download-artifact@v9
+        uses: dawidd6/action-download-artifact@07ab29fd4a977ae4d2b275087cf67563dfdf0295 # v9
         with:
           name: size-data
           run_id: ${{ github.event.workflow_run.id }}
@@ -42,18 +42,18 @@ jobs:
 
       - name: Read PR Number
         id: pr-number
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@271ff311a4947af354c6abcd696a306553b9ec18 # v1
         with:
           path: temp/size/number.txt
 
       - name: Read base branch
         id: pr-base
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@271ff311a4947af354c6abcd696a306553b9ec18 # v1
         with:
           path: temp/size/base.txt
 
       - name: Download Previous Size Data
-        uses: dawidd6/action-download-artifact@v9
+        uses: dawidd6/action-download-artifact@07ab29fd4a977ae4d2b275087cf67563dfdf0295 # v9
         with:
           branch: ${{ steps.pr-base.outputs.content }}
           workflow: size-data.yml
@@ -81,7 +81,7 @@ jobs:
 
       - name: Read Size Report
         id: size-report
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@271ff311a4947af354c6abcd696a306553b9ec18 # v1
         with:
           path: ./size-report.md
 

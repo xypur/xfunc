@@ -1,13 +1,9 @@
 # xfunc
 
-```
-██╗   ██╗███╗   ██╗███████╗██╗   ██╗███╗   ██╗████████╗
-██║   ██║████╗  ██║██╔════╝██║   ██║████╗  ██║╚══██╔══╝
-██║   ██║██╔██╗ ██║█████╗  ██║   ██║██╔██╗ ██║   ██║   
-██║   ██║██║╚██╗██║██╔══╝  ██║   ██║██║╚██╗██║   ██║   
-╚██████╔╝██║ ╚████║██║     ╚██████╔╝██║ ╚████║   ██║   
- ╚═════╝ ╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝
-```
+[![CI](https://github.com/uphg/xfunc/actions/workflows/ci.yml/badge.svg)](https://github.com/uphg/xfunc/actions)
+[![npm](https://img.shields.io/npm/v/xfunc)](https://www.npmjs.com/package/xfunc)
+[![License](https://img.shields.io/npm/l/xfunc)](LICENSE)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/xfunc)](https://bundlephobia.com/package/xfunc)
 
 A modern collection of utility functions for TypeScript/JavaScript projects.
 
@@ -163,7 +159,7 @@ isNumber(42)       // true
 
 ## Documentation
 
-Visit our [documentation site](https://uphg.github.io/xfunc/) for:
+Visit our [documentation site](https://xypur.github.io/xfunc/) for:
 - 📖 Complete API reference
 - 💡 Usage examples
 - 🎯 Best practices
