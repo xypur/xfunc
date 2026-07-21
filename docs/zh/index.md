@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "Unfunt"
+  name: "xfunc"
   text: "现代工具函数库"
   tagline: TypeScript 优先的工具函数集合，简单易用 ⚡
   actions:

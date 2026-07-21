@@ -39,7 +39,7 @@ const uint32Tag = '[object Uint32Array]'
 const promiseTag = '[object Promise]'
 const generatorTag = '[object Generator]'
 
-// 不可克隆的类型
+// Types that cannot be cloned
 const UNCLONABLE_TYPES = new Set([weakMapTag, weakSetTag, weakRefTag, functionTag, promiseTag, generatorTag])
 
 function initTypeObject(value: any): any {
@@ -81,7 +81,7 @@ function initTypeObject(value: any): any {
 
     case regExpTag: {
       const regExpValue = value as RegExp
-      // ES2021 支持 RegExp 的 dotAll 和 unicode 属性
+      // ES2021 supports RegExp dotAll and unicode properties
       const flags = regExpValue.flags || (regExpValue.global ? 'g' : '')
         + (regExpValue.ignoreCase ? 'i' : '')
         + (regExpValue.multiline ? 'm' : '')
@@ -105,7 +105,7 @@ function initTypeObject(value: any): any {
       return initCloneObject(value)
 
     default:
-      // 对于其他类型，尝试使用构造函数
+      // For other types, try the constructor
       try {
         return new Ctor(value)
       } catch {
@@ -125,7 +125,7 @@ export function cloneDeep<T>(value: T): T {
   const stack: Array<[any, any]> = [[value, root]]
 
   while (stack.length) {
-    const [source, copy] = stack.pop()! // 使用 pop 而不是 shift 提高性能
+    const [source, copy] = stack.pop()! // Use pop instead of shift for performance
     const tag = toTypeString(source)
 
     if (UNCLONABLE_TYPES.has(tag)) continue
@@ -192,11 +192,11 @@ export function cloneDeep<T>(value: T): T {
         }
       }
 
-      // ES2021：复制属性的描述符
+      // ES2021: copy property descriptors
       cloneProperties(source, copy)
     }
 
-    // ES2021：复制原型链
+    // ES2021: copy prototype chain
     Object.setPrototypeOf(copy, getPrototypeOf(source))
   }
 

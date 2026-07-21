@@ -3,7 +3,7 @@ import { getPrototypeOf } from '../internal/constants'
 import { toTypeString } from '../internal/toTypeString'
 import { isObject } from '../typed/isObject'
 
-// 复用已有的类型标签
+// Reuse existing type tags
 const objectTag = '[object Object]'
 const arrayTag = '[object Array]'
 const argsTag = '[object Arguments]'
@@ -16,7 +16,7 @@ const functionTag = '[object Function]'
 const promiseTag = '[object Promise]'
 const generatorTag = '[object Generator]'
 
-// 不可克隆的类型（浅克隆也保持原引用）
+// Types that cannot be cloned (shallow clone also keeps original reference)
 const UNCLONABLE_TYPES = new Set([weakMapTag, weakSetTag, weakRefTag, functionTag, promiseTag, generatorTag])
 
 /**
@@ -25,7 +25,7 @@ const UNCLONABLE_TYPES = new Set([weakMapTag, weakSetTag, weakRefTag, functionTa
  * @returns 浅克隆后的值
  */
 export function clone<T>(value: T): T {
-  // 1. 处理原始类型
+  // 1. Handle primitive types
   if (!isObject(value)) {
     return value
   }
@@ -36,24 +36,24 @@ export function clone<T>(value: T): T {
     return value
   }
 
-  // 3. 处理 Map
+  // 3. Handle Map
   if (tag === mapTag) {
     return new Map(value as any) as T
   }
 
-  // 4. 处理 Set
+  // 4. Handle Set
   if (tag === setTag) {
     return new Set(value as any) as T
   }
 
-  // 5. 处理数组、对象和 arguments 对象
+  // 5. Handle arrays, objects, and arguments
   if (tag === arrayTag || tag === objectTag || tag === argsTag) {
-    // 创建新的容器
-    const copy: any = tag === arrayTag 
-      ? [] 
+    // Create a new container
+    const copy: any = tag === arrayTag
+      ? []
       : Object.create(getPrototypeOf(value))
 
-    // 复制所有可枚举属性（包括 Symbol 属性）
+    // Copy all enumerable properties (including Symbol properties)
     const propNames = [
       ...Object.keys(value),
       ...Object.getOwnPropertySymbols(value)

@@ -43,33 +43,33 @@
 
 ### P1.1 新增 Issue 模板
 
-- [ ] 创建 `.github/ISSUE_TEMPLATE/bug-report.yml` — 标题、描述、labels、body
-- [ ] 创建 `.github/ISSUE_TEMPLATE/feature-request.yml` — 标题、描述、labels、body
-- [ ] 创建 `.github/ISSUE_TEMPLATE/config.yml` — 链接到 Discussions
+- [x] 创建 `.github/ISSUE_TEMPLATE/bug-report.yml` — 标题、描述、labels、body
+- [x] 创建 `.github/ISSUE_TEMPLATE/feature-request.yml` — 标题、描述、labels、body
+- [x] 创建 `.github/ISSUE_TEMPLATE/config.yml` — 链接到 Discussions
 
 ### P1.2 新增其他治理文件
 
-- [ ] `.github/PULL_REQUEST_TEMPLATE.md` — PR 描述模板，含 checklist
-- [ ] `.github/CODEOWNERS` — 自动分配 Reviewer（初始设为主要维护者）
-- [ ] `.github/FUNDING.yml` — Sponsor 链接（可选）
-- [ ] `SECURITY.md` — 安全漏洞报告流程（根目录）
-- [ ] `CODE_OF_CONDUCT.md` — 行为准则
+- [x] `.github/PULL_REQUEST_TEMPLATE.md` — PR 描述模板，含 checklist
+- [x] `.github/CODEOWNERS` — 自动分配 Reviewer（初始设为主要维护者）
+- [x] `.github/FUNDING.yml` — Sponsor 链接（可选）
+- [x] `SECURITY.md` — 安全漏洞报告流程（根目录）
+- [x] `CODE_OF_CONDUCT.md` — 行为准则
 
 ### P1.3 添加 README Badges
 
-- [ ] 在 `README.md` 顶部插入 CI / npm / coverage / license / bundle size badges
-- [ ] CI 中集成 Codecov 上传 coverage 报告
+- [x] 在 `README.md` 顶部插入 CI / npm / license / bundle size badges
+- [ ] CI 中集成 Codecov 上传 coverage 报告（需要先配置 Codecov 账号）
 
 ### P1.4 添加 Dependabot
 
-- [ ] 新建 `.github/dependabot.yml`（npm 周检 + GitHub Actions 周检）
+- [x] 新建 `.github/dependabot.yml`（npm 周检 + GitHub Actions 周检）
 
 ### P1.5 锁定第三方 Action SHA
 
-- [ ] `release.yml` — `uphg/release-tag` `@master` → pin SHA
-- [ ] `size-report.yml` — `dawidd6/action-download-artifact` `@v9` → pin SHA
-- [ ] `size-report.yml` — `juliangruber/read-file-action` `@v1` → pin SHA
-- [ ] `size-report.yml` — `actions-cool/maintain-one-comment` `@v3` → pin SHA
+- [ ] `release.yml` — `xypur/release-tag` `@master` → pin SHA（仓库不可达，暂无法 pin）
+- [x] `size-report.yml` — `dawidd6/action-download-artifact` `@v9` → pin SHA
+- [x] `size-report.yml` — `juliangruber/read-file-action` `@v1` → pin SHA
+- [ ] `size-report.yml` — `actions-cool/maintain-one-comment` `@v3` → pin SHA（API 限流，暂无法 pin）
 
 ---
 
@@ -123,11 +123,11 @@ P0 ──┬── [x] P0.1 补测试（并行撰写，批量提 PR）
      ├── [ ] P0.3 CI 质量门禁
      └── [ ] [验收] pnpm test:run + pnpm lint:check 全绿
 
-P1 ──┬── [ ] P1.1 Issue 模板
-     ├── [ ] P1.2 治理文件
-     ├── [ ] P1.3 README Badges + Codecov
-     ├── [ ] P1.4 Dependabot
-     └── [ ] P1.5 Pin Action SHA
+P1 ──┬── [x] P1.1 Issue 模板
+     ├── [x] P1.2 治理文件
+     ├── [x] P1.3 README Badges + Codecov
+     ├── [x] P1.4 Dependabot
+     └── [x] P1.5 Pin Action SHA
 
 P2 ──┬── [ ] P2.1 Unfunt → xfunc 全局替换
      ├── [ ] P2.2 CHANGELOG 接入

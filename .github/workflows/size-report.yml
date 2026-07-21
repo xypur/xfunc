@@ -92,5 +92,5 @@ jobs:
           number: ${{ steps.pr-number.outputs.content }}
           body: |
             ${{ steps.size-report.outputs.content }}
-            <!-- UNFUNT_SIZE -->
-          body-include: '<!-- UNFUNT_SIZE -->'
+            <!-- XFUNC_SIZE -->
+          body-include: '<!-- XFUNC_SIZE -->'

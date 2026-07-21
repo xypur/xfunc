@@ -22,9 +22,13 @@ export function createPackageConfig(version = '0.1.6') {
     },
     description: 'A lightweight JavaScript utility library with common functions',
     keywords: ['javascript', 'typescript', 'utils', 'utility', 'functions', 'library', 'tools'],
-    homepage: 'https://github.com/uphg/xfunc#readme',
-    repository: 'uphg/xfunc',
-    bugs: 'https://github.com/uphg/xfunc/issues',
-    author: 'Lv Heng <lvheng233@gmail.com>'
+    homepage: 'https://github.com/xypur/xfunc#readme',
+    repository: 'xypur/xfunc',
+    bugs: 'https://github.com/xypur/xfunc/issues',
+    author: 'Lv Heng <lvheng233@gmail.com>',
+    sideEffects: false,
+    engines: {
+      node: '>=18'
+    }
   }
 }

@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "Unfunt"
+  name: "xfunc"
   text: "Modern Utility Functions"
   tagline: A TypeScript-first collection of utility functions that just work ⚡
   actions:

@@ -1,8 +1,8 @@
-# Contributing to Unfunt
+# Contributing to xfunc
 
 English | [中文](./CONTRIBUTING.zh-CN.md)
 
-Thank you for your interest in contributing to Unfunt! This guide will help you get started with contributing to this TypeScript/JavaScript utility library.
+Thank you for your interest in contributing to xfunc! This guide will help you get started with contributing to this TypeScript/JavaScript utility library.
 
 ## Table of Contents
 
@@ -266,4 +266,4 @@ Releases are handled by maintainers using automated scripts:
 - Help others learn and grow
 - Follow the project's technical standards
 
-Thank you for contributing to Unfunt! 🚀
+Thank you for contributing to xfunc! 🚀

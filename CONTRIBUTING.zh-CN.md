@@ -1,8 +1,8 @@
-# Unfunt 贡献指南
+# xfunc 贡献指南
 
 [English](./CONTRIBUTING.md) | 中文
 
-感谢您对 Unfunt 项目的关注！本指南将帮助您开始为这个 TypeScript/JavaScript 工具库项目做出贡献。
+感谢您对 xfunc 项目的关注！本指南将帮助您开始为这个 TypeScript/JavaScript 工具库项目做出贡献。
 
 ## 目录
 
@@ -266,4 +266,4 @@ test: add edge cases for toNumber utility
 - 帮助他人学习和成长
 - 遵循项目的技术标准
 
-感谢您为 Unfunt 做出贡献！🚀
+感谢您为 xfunc 做出贡献！🚀

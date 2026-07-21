@@ -1,6 +1,6 @@
 # xfunc
 
-[![CI](https://github.com/uphg/xfunc/actions/workflows/ci.yml/badge.svg)](https://github.com/uphg/xfunc/actions)
+[![CI](https://github.com/xypur/xfunc/actions/workflows/ci.yml/badge.svg)](https://github.com/xypur/xfunc/actions)
 [![npm](https://img.shields.io/npm/v/xfunc)](https://www.npmjs.com/package/xfunc)
 [![License](https://img.shields.io/npm/l/xfunc)](LICENSE)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/xfunc)](https://bundlephobia.com/package/xfunc)
