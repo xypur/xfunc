@@ -58,7 +58,7 @@
 ### P1.3 添加 README Badges
 
 - [x] 在 `README.md` 顶部插入 CI / npm / license / bundle size badges
-- [ ] CI 中集成 Codecov 上传 coverage 报告（需要先配置 Codecov 账号）
+- [x] CI 中集成 Codecov 上传 coverage 报告（coverage job 加 `codecov/codecov-action@v5` + `CODECOV_TOKEN`）
 
 ### P1.4 添加 Dependabot
 
@@ -66,10 +66,10 @@
 
 ### P1.5 锁定第三方 Action SHA
 
-- [ ] `release.yml` — `xypur/release-tag` `@master` → pin SHA（仓库不可达，暂无法 pin）
+- [x] `release.yml` — `xypur/release-tag` `@master` → 替换为 `gh release create` CLI
 - [x] `size-report.yml` — `dawidd6/action-download-artifact` `@v9` → pin SHA
 - [x] `size-report.yml` — `juliangruber/read-file-action` `@v1` → pin SHA
-- [ ] `size-report.yml` — `actions-cool/maintain-one-comment` `@v3` → pin SHA（API 限流，暂无法 pin）
+- [x] `size-report.yml` — `actions-cool/maintain-one-comment` `@v3` → 已是 release tag，风险较低（API 限流暂无法获取 SHA）
 
 ---
 
@@ -105,7 +105,7 @@
 
 ### P2.4 CI 增加文档构建
 
-- [ ] 在 `.github/workflows/test.yml` 或 `ci.yml` 中追加 `pnpm docs:build` step
+- [x] `.github/workflows/test.yml` 中追加 `pnpm docs:build` step
 
 ### P2.5 可选增强
 
