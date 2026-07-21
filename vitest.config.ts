@@ -9,7 +9,19 @@ export default defineConfig({
     // Coverage configuration
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json', 'html']
+      reporter: ['text', 'json', 'html'],
+      include: ['src/**/*.ts'],
+      exclude: [
+        'src/**/index.ts',
+        'scripts/**',
+        '**/*.config.*'
+      ],
+      thresholds: {
+        lines: 70,
+        functions: 80,
+        branches: 75,
+        statements: 70
+      }
     },
     // Environment configuration
     environment: 'node',
