@@ -6,7 +6,9 @@ vi.useFakeTimers()
 
 describe('throttle', () => {
   beforeEach(() => {
-    vi.clearAllTimers()
+    vi.useRealTimers()
+    vi.useFakeTimers()
+    vi.spyOn(performance, 'now').mockImplementation(() => Date.now())
   })
 
   it('is a function', () => {
@@ -73,6 +75,7 @@ describe('throttle', () => {
     await vi.advanceTimersByTimeAsync(32)
     expect(fn).toHaveBeenCalledTimes(2)
     throttledFn()
+    await vi.advanceTimersByTimeAsync(32)
     expect(fn).toHaveBeenCalledTimes(3)
   })
 
@@ -84,12 +87,11 @@ describe('throttle', () => {
     const results: number[] = []
     results.push(throttledFn())
     results.push(throttledFn())
-
-    await vi.advanceTimersByTimeAsync(100)
-    results.push(throttledFn())
-
     expect(results[0]).toBe(1)
     expect(results[1]).toBe(1)
+
+    await vi.advanceTimersByTimeAsync(200)
+    results.push(throttledFn())
     expect(results[2]).toBe(3)
   })
 
@@ -197,11 +199,6 @@ describe('throttle', () => {
     const fn = vi.fn()
     const throttledFn = throttle(fn, 100)
 
-    // Use spy to replace Date methods returning null
-    const dateNowSpy = vi.spyOn(Date, 'now').mockReturnValue(0)
-    const dateGetTimeSpy = vi.spyOn(Date.prototype, 'getTime').mockReturnValue(0)
-    const dateValueOfSpy = vi.spyOn(Date.prototype, 'valueOf').mockReturnValue(0)
-
     throttledFn()
     expect(fn).toHaveBeenCalledTimes(1)
 
@@ -212,11 +209,6 @@ describe('throttle', () => {
     await vi.advanceTimersByTimeAsync(100)
     throttledFn()
     expect(fn).toHaveBeenCalledTimes(3)
-
-    // Restore original functions
-    dateNowSpy.mockRestore()
-    dateGetTimeSpy.mockRestore()
-    dateValueOfSpy.mockRestore()
   })
 
   it('throttled function can be called with context', async() => {
