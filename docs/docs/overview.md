@@ -1,12 +1,11 @@
 # API Reference
 
-Welcome to the Unfunt API reference documentation. Unfunt is a collection of utility functions designed for TypeScript/JavaScript.
+Welcome to the xfunc API reference documentation. xfunc is a collection of utility functions designed for TypeScript/JavaScript.
 
 ## Quick Navigation
 
 ### [Array Methods](./array.md)
 Utility methods for array processing
-- `remain` - Split array by given parameters and return the remaining parts
 - `toArray` - Convert value to array
 
 ### [Function Methods](./function.md)  
@@ -17,12 +16,15 @@ Utility methods for function processing
 ### [Number Methods](./number.md)
 Utility methods for number processing
 - `toNumber` - Convert value to number
-- `toFinite` - Convert value to finite number
-- `toInteger` - Convert value to integer
-- `toLength` - Convert value to integer suitable for array-like object length
+- `randomInt` - Generate random integer in range
 
 ### [Object Methods](./object.md)
 Utility methods for object processing
+- `forOwn` - Iterate over own object properties
+- `hasOwn` - Check for own property
+- `clone` - Create shallow clone
+- `cloneDeep` - Create deep clone
+- `merge` - Deep merge objects
 - `omit` / `omitBy` - Create object excluding specified properties
 - `pick` / `pickBy` - Create object with only specified properties
 - `mapEntries` - Transform object key-value pairs through mapping function
@@ -30,17 +32,21 @@ Utility methods for object processing
 
 ### [String Methods](./string.md)
 Utility methods for string processing
-- `trim` - Remove whitespace from both ends of string
+- `capitalize` - Capitalize first character, lowercase rest
+- `lowerFirst` - Convert first character to lowercase
+- `upperFirst` - Convert first character to uppercase
+- `camelize` - Convert hyphenated string to camelCase
+- `hyphenate` - Convert camelCase string to hyphenated
 
 ### [Type Check Methods](./typed.md)
 Utility methods for type checking
-- Contains 17 type checking functions like `isArray`, `isString`, `isNumber`, etc.
+- Contains 21 type checking functions like `isString`, `isNumber`, `isBoolean`, etc.
 
 ## Usage
 
 ```ts
 // Import specific functions
-import { debounce, isArray, toNumber } from 'xfunc'
+import { debounce, toNumber } from 'xfunc'
 
 // Or import all methods
 import * as xfunc from 'xfunc'
@@ -48,7 +54,7 @@ import * as xfunc from 'xfunc'
 
 ## Overview
 
-Unfunt provides a comprehensive set of utility functions that are:
+xfunc provides a comprehensive set of utility functions that are:
 
 - **Type-safe**: Built with TypeScript for excellent IntelliSense
 - **Tree-shakable**: Import only what you need

@@ -1,6 +1,6 @@
 # GitHub Actions Guide
 
-This guide shows how to integrate Unfunt into your GitHub Actions CI/CD workflows.
+This guide shows how to integrate xfunc into your GitHub Actions CI/CD workflows.
 
 ## Basic Setup
 

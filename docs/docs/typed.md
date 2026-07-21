@@ -199,30 +199,207 @@ isError({ message: 'error' })
 // => false
 ```
 
+### Iterable Checks
+
+#### `isArrayLike(value)`
+
+Checks if `value` is an array-like object.
+
+```ts
+import { isArrayLike } from 'xfunc'
+
+isArrayLike([1, 2, 3])
+// => true
+
+isArrayLike('hello')
+// => true
+
+isArrayLike({ length: 2, 0: 'a', 1: 'b' })
+// => true
+```
+
+#### `isLength(value)`
+
+Checks if `value` is a valid array-like length.
+
+```ts
+import { isLength } from 'xfunc'
+
+isLength(3)
+// => true
+
+isLength(Number.MAX_SAFE_INTEGER)
+// => true
+
+isLength(-1)
+// => false
+
+isLength(3.2)
+// => false
+```
+
+#### `isObjectLike(value)`
+
+Checks if `value` is object-like (not `null`, typeof is 'object').
+
+```ts
+import { isObjectLike } from 'xfunc'
+
+isObjectLike({})
+// => true
+
+isObjectLike([])
+// => true
+
+isObjectLike(() => {})
+// => false
+
+isObjectLike(null)
+// => false
+```
+
+#### `isPrimitive(value)`
+
+Checks if `value` is a primitive type.
+
+```ts
+import { isPrimitive } from 'xfunc'
+
+isPrimitive('hello')
+// => true
+
+isPrimitive(42)
+// => true
+
+isPrimitive(null)
+// => true
+
+isPrimitive({})
+// => false
+```
+
+#### `isIterable(value)`
+
+Checks if `value` is iterable.
+
+```ts
+import { isIterable } from 'xfunc'
+
+isIterable([1, 2, 3])
+// => true
+
+isIterable('hello')
+// => true
+
+isIterable(new Set())
+// => true
+
+isIterable({})
+// => false
+```
+
+### Utility Functions
+
+#### `isTypeString(value)`
+
+Checks if `value` is a type string.
+
+```ts
+import { isTypeString } from 'xfunc'
+
+isTypeString('string')
+// => true
+
+isTypeString('number')
+// => true
+
+isTypeString(42)
+// => false
+```
+
+#### `toRawType(value)`
+
+Gets the raw type string of a value.
+
+```ts
+import { toRawType } from 'xfunc'
+
+toRawType('hello')
+// => 'string'
+
+toRawType(42)
+// => 'number'
+
+toRawType(null)
+// => 'null'
+
+toRawType(undefined)
+// => 'undefined'
+
+toRawType([])
+// => 'array'
+```
+
+#### `makeMap(list)`
+
+Creates a mapping function to check if a value is in the given list.
+
+```ts
+import { makeMap } from 'xfunc'
+
+const isReservedWord = makeMap(['if', 'else', 'for', 'while'])
+
+isReservedWord('if')
+// => true
+
+isReservedWord('hello')
+// => false
+```
+
+#### `isNumericKey(value)`
+
+Checks if `value` is a numeric key.
+
+```ts
+import { isNumericKey } from 'xfunc'
+
+isNumericKey('0')
+// => true
+
+isNumericKey('42')
+// => true
+
+isNumericKey('abc')
+// => false
+
+isNumericKey(0)
+// => true
+```
+
 ## Complete List
 
 All available type checking functions:
 
-- `isString` 
-- `isNumber`
-- `isBoolean`
-- `isNil`
-- `isEmpty`
-- `isObject`
-- `isPlainObject`
-- `isFunction`
-- `isDate`
-- `isRegExp`
-- `isPromise`
-- `isError`
-- `isSymbol`
-- `isBigInt`
 - `isArrayLike`
-- `isSet`
-- `isMap`
-- `isLength`
-- `isObjectLike`
-- `isPrimitive`
+- `isBoolean`
+- `isDate`
+- `isEmpty`
+- `isError`
+- `isFunction`
 - `isIterable`
+- `isLength`
+- `isNil`
+- `isNumber`
+- `isObject`
+- `isObjectLike`
+- `isPlainObject`
+- `isPrimitive`
+- `isPromise`
+- `isRegExp`
+- `isString`
+- `isTypeString`
+- `toRawType`
+- `makeMap`
+- `isNumericKey`
 
 Each function returns a boolean value indicating whether the value matches the expected type.

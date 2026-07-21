@@ -277,3 +277,43 @@ console.log(cloned.b === original.b)
 - 所有嵌套的对象和数组都被递归克隆
 - 安全处理循环引用
 
+## `merge(target, ...sources)`
+
+将多个对象深度合并到目标对象中，支持类型安全的嵌套对象递归合并和数组连接。
+
+### 使用示例
+
+```ts
+import { merge } from 'xfunc'
+
+const target = { a: 1, b: { c: 2, d: [1, 2] } }
+const source = { b: { c: 10, e: 3 }, f: 4 }
+
+merge(target, source)
+// => { a: 1, b: { c: 10, d: [1, 2], e: 3 }, f: 4 }
+
+// 数组连接
+merge({ arr: [1, 2] }, { arr: [3, 4] })
+// => { arr: [1, 2, 3, 4] }
+
+// 多个源对象
+merge({ a: 1 }, { b: 2 }, { c: 3 })
+// => { a: 1, b: 2, c: 3 }
+```
+
+### 参数
+
+1. `target` *(Object)*: 目标对象
+2. `...sources` *(Object[])*: 源对象
+
+### 返回值
+
+*(Object)*: 返回 `target`
+
+### 说明
+
+- 会修改并返回目标对象
+- 嵌套对象会被递归合并
+- 数组默认进行连接
+- 非普通对象（如 Date）不会被合并
+

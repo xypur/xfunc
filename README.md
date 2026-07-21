@@ -34,7 +34,7 @@ pnpm add xfunc
 
 ```ts
 // Import specific functions (recommended for tree shaking)
-import { debounce, isArray } from 'xfunc'
+import { debounce } from 'xfunc'
 
 // Or import everything
 import * as xfunc from 'xfunc'
@@ -44,7 +44,7 @@ const debouncedHandler = debounce(() => {
   console.log('Called after 300ms delay')
 }, 300)
 
-if (isArray(data)) {
+if (Array.isArray(data)) {
   console.log('data is an array')
 }
 ```
@@ -80,6 +80,7 @@ if (isArray(data)) {
 - `hasOwn` - Check for own property
 - `clone` - Create shallow clone
 - `cloneDeep` - Create deep clone
+- `merge` - Deep merge objects
 
 ### [String Methods](./docs/docs/string.md)
 - `capitalize` - Capitalize first character, lowercase rest
@@ -89,11 +90,11 @@ if (isArray(data)) {
 - `hyphenate` - Convert camelCase string to hyphenated
 
 ### [Type Check Methods](./docs/docs/typed.md)
-22 type checking utilities including:
-- `isArray`, `isString`, `isNumber`, `isBoolean`
+21 type checking utilities including:
+- `isString`, `isNumber`, `isBoolean`
 - `isEmpty`, `isNil`, `isFunction`, `isObject`
 - `isDate`, `isRegExp`, `isPromise`, `isError`
-- `isMap`, `isSet`, `isBigInt`, `isSymbol`
+- `isTypeString`, `toRawType`, `makeMap`, `isNumericKey`
 - And more...
 
 ### [Structure Methods](./docs/docs/structure.md)
@@ -117,7 +118,7 @@ input.addEventListener('input', (e) => {
 
 ### Type-Safe Object Manipulation
 ```ts
-import { pick, omit, isObject } from 'xfunc'
+import { pick, omit, isObject, isEmpty } from 'xfunc'
 
 const user = { id: 1, name: 'John', email: 'john@example.com', password: 'secret' }
 

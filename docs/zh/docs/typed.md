@@ -1,4 +1,4 @@
-# Type Check Methods
+# 类型检查方法
 
 这些是类型检查的实用方法。
 
@@ -6,7 +6,7 @@
 
 检查值是否为类数组对象
 
-### Usage
+### 使用示例
 
 ```ts
 import { isArrayLike } from 'xfunc'
@@ -29,35 +29,11 @@ isArrayLike({ length: 2, 0: 'a', 1: 'b' })
 
 *(boolean)*: 如果值是类数组对象返回 true，否则返回 false
 
-## `isBigInt(value)`
-
-检查值是否为 BigInt
-
-### Usage
-
-```ts
-import { isBigInt } from 'xfunc'
-
-isBigInt(123n)
-// => true
-
-isBigInt(123)
-// => false
-```
-
-### Arguments
-
-1. `value` *(unknown)*: 要检查的值
-
-### Returns
-
-*(boolean)*: 如果值是 BigInt 返回 true，否则返回 false
-
 ## `isBoolean(value)`
 
 检查值是否为布尔值
 
-### Usage
+### 使用示例
 
 ```ts
 import { isBoolean } from 'xfunc'
@@ -84,7 +60,7 @@ isBoolean(1)
 
 检查值是否为 Date 对象
 
-### Usage
+### 使用示例
 
 ```ts
 import { isDate } from 'xfunc'
@@ -108,7 +84,7 @@ isDate('2023-01-01')
 
 检查值是否为空
 
-### Usage
+### 使用示例
 
 ```ts
 import { isEmpty } from 'xfunc'
@@ -141,7 +117,7 @@ isEmpty([1, 2, 3])
 
 检查值是否为函数
 
-### Usage
+### 使用示例
 
 ```ts
 import { isFunction } from 'xfunc'
@@ -164,59 +140,11 @@ isFunction('hello')
 
 *(boolean)*: 如果值是函数返回 true，否则返回 false
 
-## `isSet(value)`
-
-检查值是否为 Set 对象
-
-### Usage
-
-```ts
-import { isSet } from 'xfunc'
-
-isSet(new Set())
-// => true
-
-isSet([])
-// => false
-```
-
-### Arguments
-
-1. `value` *(unknown)*: 要检查的值
-
-### Returns
-
-*(boolean)*: 如果值是 Set 对象返回 true，否则返回 false
-
-## `isMap(value)`
-
-检查值是否为 Map 对象
-
-### Usage
-
-```ts
-import { isMap } from 'xfunc'
-
-isMap(new Map())
-// => true
-
-isMap({})
-// => false
-```
-
-### Arguments
-
-1. `value` *(unknown)*: 要检查的值
-
-### Returns
-
-*(boolean)*: 如果值是 Map 对象返回 true，否则返回 false
-
 ## `isError(value)`
 
 检查值是否为错误对象
 
-### Usage
+### 使用示例
 
 ```ts
 import { isError } from 'xfunc'
@@ -243,7 +171,7 @@ isError('error message')
 
 检查值是否为有效的类数组长度
 
-### Usage
+### 使用示例
 
 ```ts
 import { isLength } from 'xfunc'
@@ -273,7 +201,7 @@ isLength(3.2)
 
 检查值是否为 null 或 undefined
 
-### Usage
+### 使用示例
 
 ```ts
 import { isNil } from 'xfunc'
@@ -303,7 +231,7 @@ isNil('')
 
 检查值是否为数字
 
-### Usage
+### 使用示例
 
 ```ts
 import { isNumber } from 'xfunc'
@@ -330,7 +258,7 @@ isNumber('42')
 
 检查值是否为对象类型
 
-### Usage
+### 使用示例
 
 ```ts
 import { isObject } from 'xfunc'
@@ -360,7 +288,7 @@ isObject(null)
 
 检查值是否为类对象
 
-### Usage
+### 使用示例
 
 ```ts
 import { isObjectLike } from 'xfunc'
@@ -390,7 +318,7 @@ isObjectLike(null)
 
 检查值是否为普通对象
 
-### Usage
+### 使用示例
 
 ```ts
 import { isPlainObject } from 'xfunc'
@@ -420,7 +348,7 @@ isPlainObject(new Date())
 
 检查值是否为原始类型
 
-### Usage
+### 使用示例
 
 ```ts
 import { isPrimitive } from 'xfunc'
@@ -450,7 +378,7 @@ isPrimitive({})
 
 检查值是否为 Promise 对象
 
-### Usage
+### 使用示例
 
 ```ts
 import { isPromise } from 'xfunc'
@@ -477,7 +405,7 @@ isPromise({})
 
 检查值是否为正则表达式
 
-### Usage
+### 使用示例
 
 ```ts
 import { isRegExp } from 'xfunc'
@@ -504,7 +432,7 @@ isRegExp('abc')
 
 检查值是否为字符串
 
-### Usage
+### 使用示例
 
 ```ts
 import { isString } from 'xfunc'
@@ -527,38 +455,11 @@ isString(42)
 
 *(boolean)*: 如果值是字符串返回 true，否则返回 false
 
-## `isSymbol(value)`
-
-检查值是否为 Symbol
-
-### Usage
-
-```ts
-import { isSymbol } from 'xfunc'
-
-isSymbol(Symbol('test'))
-// => true
-
-isSymbol(Symbol.iterator)
-// => true
-
-isSymbol('symbol')
-// => false
-```
-
-### Arguments
-
-1. `value` *(unknown)*: 要检查的值
-
-### Returns
-
-*(boolean)*: 如果值是 Symbol 返回 true，否则返回 false
-
 ## `isIterable(value)`
 
 检查值是否为可迭代对象
 
-### Usage
+### 使用示例
 
 ```ts
 import { isIterable } from 'xfunc'
@@ -704,15 +605,14 @@ isNumericKey(0)
 
 所有可用的类型检查函数：
 
-- `isArrayLike` 
-- `isBigInt`
+- `isArrayLike`
 - `isBoolean`
 - `isDate`
 - `isEmpty`
 - `isError`
 - `isFunction`
+- `isIterable`
 - `isLength`
-- `isMap`
 - `isNil`
 - `isNumber`
 - `isObject`
@@ -721,10 +621,7 @@ isNumericKey(0)
 - `isPrimitive`
 - `isPromise`
 - `isRegExp`
-- `isSet`
 - `isString`
-- `isSymbol`
-- `isIterable`
 - `isTypeString`
 - `toRawType`
 - `makeMap`

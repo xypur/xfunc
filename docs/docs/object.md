@@ -277,3 +277,44 @@ console.log(cloned.b === original.b)
 - All nested objects and arrays are recursively cloned
 - Handles circular references safely
 
+## `merge(target, ...sources)`
+
+Deep merge multiple objects into a target object, with type-safe recursive merging of nested objects and array concatenation.
+
+### Usage
+
+```ts
+import { merge } from 'xfunc'
+
+const target = { a: 1, b: { c: 2, d: [1, 2] } }
+const source = { b: { c: 10, e: 3 }, f: 4 }
+
+merge(target, source)
+// => { a: 1, b: { c: 10, d: [1, 2], e: 3 }, f: 4 }
+
+// Array concatenation
+merge({ arr: [1, 2] }, { arr: [3, 4] })
+// => { arr: [1, 2, 3, 4] }
+
+// Multiple sources
+merge({ a: 1 }, { b: 2 }, { c: 3 })
+// => { a: 1, b: 2, c: 3 }
+```
+
+### Arguments
+
+1. `target` *(Object)*: The destination object
+2. `...sources` *(Object[])*: The source objects
+
+### Returns
+
+*(Object)*: Returns `target`
+
+### Notes
+
+- Mutates and returns the target object
+- Nested objects are recursively merged
+- Arrays are concatenated by default
+- Non-plain objects (Date, etc.) are not merged
+
+

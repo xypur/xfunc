@@ -1,10 +1,10 @@
-# Quick Start
+# 快速入门
 
-Get started with Unfunt in minutes! This guide will help you install and use the most common utility functions.
+几分钟内即可上手 xfunc！本指南将帮助你安装和使用最常用的工具函数。
 
-## Installation
+## 安装
 
-Choose your preferred package manager:
+选择你喜欢的包管理器：
 
 ::: code-group
 ```bash [pnpm]
@@ -20,61 +20,63 @@ yarn add xfunc
 ```
 :::
 
-## Basic Usage
+## 基本用法
 
-Unfunt supports both ESM and CommonJS imports. For optimal tree shaking, import only the functions you need:
+xfunc 同时支持 ESM 和 CommonJS 导入方式。为了获得最佳的 tree shaking 效果，请只导入你需要的函数：
 
 ```ts
-// ✅ Recommended: Import specific functions
-import { debounce, isArray, toNumber } from 'xfunc'
+// ✅ 推荐：按需导入特定函数
+import { debounce, toNumber } from 'xfunc'
 
-// ✅ Also works: Import all functions
+// ✅ 也可以：导入所有函数
 import * as xfunc from 'xfunc'
 ```
 
-## Common Use Cases
+## 常见用例
 
-### 🚀 Function Utilities
+### 🚀 函数工具
 
-#### Debounce API Calls
-Perfect for search inputs and form validation:
+#### 防抖 API 调用
+
+非常适合搜索输入和表单验证：
 
 ```ts
 import { debounce } from 'xfunc'
 
 const searchHandler = debounce((query: string) => {
-  // API call only happens 300ms after user stops typing
+  // 用户停止输入 300ms 后才触发 API 调用
   searchAPI(query)
 }, 300)
 
-// Use in your event handlers
+// 在事件处理器中使用
 searchInput.addEventListener('input', (e) => {
   searchHandler(e.target.value)
 })
 ```
 
-#### Throttle Events
-Great for scroll handlers and button clicks:
+#### 节流事件
+
+非常适合滚动处理和按钮点击：
 
 ```ts
 import { throttle } from 'xfunc'
 
 const scrollHandler = throttle(() => {
-  console.log('Scroll event handled')
+  console.log('滚动事件已处理')
 }, 100)
 
 window.addEventListener('scroll', scrollHandler)
 ```
 
-### 🔍 Type Checking
+### 🔍 类型检查
 
-Safe and reliable type checking for any value:
+对任何值进行安全可靠的类型检查：
 
 ```ts
-import { isArray, isString, isEmpty, isNil } from 'xfunc'
+import { isString, isEmpty, isNil } from 'xfunc'
 
-// Check types safely
-if (isArray(data)) {
+// 安全地检查类型
+if (Array.isArray(data)) {
   data.forEach(item => console.log(item))
 }
 
@@ -82,38 +84,33 @@ if (isString(userInput) && !isEmpty(userInput)) {
   processInput(userInput)
 }
 
-// Handle null/undefined
+// 处理 null/undefined
 if (!isNil(value)) {
-  // value is neither null nor undefined
+  // value 既不是 null 也不是 undefined
   console.log(value)
 }
 ```
 
-### 📊 Array Operations
+### 📊 数组操作
 
 ```ts
-import { toArray, remain } from 'xfunc'
+import { toArray } from 'xfunc'
 
-// Convert anything to array
-const items = toArray(userInput) // Works with strings, numbers, arrays, etc.
-
-// Split and get remaining parts
-const [first, second, ...rest] = remain([1, 2, 3, 4, 5], 2)
-// first: [1, 2], second: undefined, rest: [3, 4, 5]
+// 将任意值转换为数组
+const items = toArray(userInput) // 适用于字符串、数字、数组等
 ```
 
-### 🔢 Number Conversion
+### 🔢 数字转换
 
 ```ts
-import { toNumber, toInteger, toFinite } from 'xfunc'
+import { toNumber } from 'xfunc'
 
-// Safe number conversion
-const age = toNumber(formData.age) // Handles strings, arrays, etc.
-const count = toInteger('42.7')    // 42
-const ratio = toFinite(Infinity)   // Number.MAX_VALUE
+// 安全的数字转换
+const age = toNumber(formData.age) // 处理字符串、数组等
+const price = toNumber('$1,200.50') // 0 (处理非数字字符串)
 ```
 
-### 🏗️ Object Manipulation
+### 🏗️ 对象操作
 
 ```ts
 import { pick, omit, mapEntries } from 'xfunc'
@@ -126,23 +123,23 @@ const user = {
   createdAt: '2024-01-01'
 }
 
-// Extract only needed properties
+// 只提取需要的属性
 const publicUser = pick(user, ['id', 'name', 'email'])
 // { id: 1, name: 'John', email: 'john@example.com' }
 
-// Remove sensitive data
+// 移除敏感数据
 const safeUser = omit(user, ['password'])
 
-// Transform object entries
+// 转换对象条目
 const transformed = mapEntries(user, ([key, value]) => [
   key.toUpperCase(), 
   typeof value === 'string' ? value.toUpperCase() : value
 ])
 ```
 
-## Real-World Examples
+## 实际应用示例
 
-### Form Validation with Debounce
+### 使用防抖进行表单验证
 
 ```ts
 import { debounce, isString, isEmpty } from 'xfunc'
@@ -150,11 +147,11 @@ import { debounce, isString, isEmpty } from 'xfunc'
 class FormValidator {
   private validateEmail = debounce((email: string) => {
     if (!isString(email) || isEmpty(email)) {
-      this.showError('Email is required')
+      this.showError('邮箱为必填项')
       return
     }
     
-    // Validate email format...
+    // 验证邮箱格式...
     this.validateEmailFormat(email)
   }, 500)
 
@@ -165,24 +162,24 @@ class FormValidator {
 }
 ```
 
-### API Response Processing
+### API 响应处理
 
 ```ts
-import { isArray, pick, toNumber } from 'xfunc'
+import { pick, toNumber } from 'xfunc'
 
 function processApiResponse(response: unknown) {
-  if (!isArray(response)) {
-    throw new Error('Expected array response')
+  if (!Array.isArray(response)) {
+    throw new Error('期望数组响应')
   }
 
   return response.map(item => ({
     ...pick(item, ['id', 'name', 'email']),
-    id: toNumber(item.id), // Ensure ID is a number
+    id: toNumber(item.id), // 确保 ID 是数字
   }))
 }
 ```
 
-### Infinite Scroll with Throttle
+### 使用节流实现无限滚动
 
 ```ts
 import { throttle } from 'xfunc'
@@ -200,30 +197,30 @@ class InfiniteScroll {
 }
 ```
 
-## Next Steps
+## 下一步
 
-- 📚 Explore the [complete API reference](/zh/docs/overview)
-- 🎯 Check out more [examples and patterns](/zh/docs/)
-- 🔧 Learn about [advanced usage](/zh/docs/structure)
-- 💡 See [best practices](/zh/docs/github-actions-guide) for production apps
+- 📚 探索完整的 [API 参考](/zh/docs/overview)
+- 🎯 查看更多 [示例和模式](/zh/docs/)
+- 🔧 了解 [高级用法](/zh/docs/structure)
+- 💡 查看生产环境应用的 [CI/CD 集成指南](/zh/docs/github-actions-guide)
 
-## TypeScript Support
+## TypeScript 支持
 
-Unfunt is built with TypeScript and provides excellent type safety out of the box:
+xfunc 使用 TypeScript 构建，开箱即用，提供出色的类型安全保障：
 
 ```ts
-import { isArray, pick } from 'xfunc'
+import { pick } from 'xfunc'
 
 function processData<T>(data: T) {
-  if (isArray(data)) {
-    // TypeScript knows data is an array here
+  if (Array.isArray(data)) {
+    // TypeScript 知道这里的 data 是一个数组
     return data.map(item => item)
   }
   
-  // Type-safe object operations
+  // 类型安全的对象操作
   const result = pick(data as Record<string, unknown>, ['id', 'name'])
   return result
 }
 ```
 
-Ready to dive deeper? Check out our [API documentation](/zh/docs/overview) for complete function references and advanced usage patterns.
+准备深入了解？查看我们的 [API 文档](/zh/docs/overview)，获取完整的函数参考和高级用法模式。

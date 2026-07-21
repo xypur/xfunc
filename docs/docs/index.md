@@ -1,6 +1,6 @@
 # Quick Start
 
-Get started with Unfunt in minutes! This guide will help you install and use the most common utility functions.
+Get started with xfunc in minutes! This guide will help you install and use the most common utility functions.
 
 ## Installation
 
@@ -22,11 +22,11 @@ yarn add xfunc
 
 ## Basic Usage
 
-Unfunt supports both ESM and CommonJS imports. For optimal tree shaking, import only the functions you need:
+xfunc supports both ESM and CommonJS imports. For optimal tree shaking, import only the functions you need:
 
 ```ts
 // ✅ Recommended: Import specific functions
-import { debounce, isArray, toNumber } from 'xfunc'
+import { debounce, toNumber } from 'xfunc'
 
 // ✅ Also works: Import all functions
 import * as xfunc from 'xfunc'
@@ -71,10 +71,10 @@ window.addEventListener('scroll', scrollHandler)
 Safe and reliable type checking for any value:
 
 ```ts
-import { isArray, isString, isEmpty, isNil } from 'xfunc'
+import { isString, isEmpty, isNil } from 'xfunc'
 
 // Check types safely
-if (isArray(data)) {
+if (Array.isArray(data)) {
   data.forEach(item => console.log(item))
 }
 
@@ -92,25 +92,20 @@ if (!isNil(value)) {
 ### 📊 Array Operations
 
 ```ts
-import { toArray, remain } from 'xfunc'
+import { toArray } from 'xfunc'
 
 // Convert anything to array
 const items = toArray(userInput) // Works with strings, numbers, arrays, etc.
-
-// Split and get remaining parts
-const [first, second, ...rest] = remain([1, 2, 3, 4, 5], 2)
-// first: [1, 2], second: undefined, rest: [3, 4, 5]
 ```
 
 ### 🔢 Number Conversion
 
 ```ts
-import { toNumber, toInteger, toFinite } from 'xfunc'
+import { toNumber } from 'xfunc'
 
 // Safe number conversion
 const age = toNumber(formData.age) // Handles strings, arrays, etc.
-const count = toInteger('42.7')    // 42
-const ratio = toFinite(Infinity)   // Number.MAX_VALUE
+const price = toNumber('$1,200.50') // 0 (handles non-numeric gracefully)
 ```
 
 ### 🏗️ Object Manipulation
@@ -168,10 +163,10 @@ class FormValidator {
 ### API Response Processing
 
 ```ts
-import { isArray, pick, toNumber } from 'xfunc'
+import { pick, toNumber } from 'xfunc'
 
 function processApiResponse(response: unknown) {
-  if (!isArray(response)) {
+  if (!Array.isArray(response)) {
     throw new Error('Expected array response')
   }
 
@@ -205,17 +200,17 @@ class InfiniteScroll {
 - 📚 Explore the [complete API reference](/docs/overview)
 - 🎯 Check out more [examples and patterns](/docs/)
 - 🔧 Learn about [advanced usage](/docs/structure)
-- 💡 See [best practices](/docs/github-actions-guide) for production apps
+- 💡 See [CI/CD integration guide](/docs/github-actions-guide) for production apps
 
 ## TypeScript Support
 
-Unfunt is built with TypeScript and provides excellent type safety out of the box:
+xfunc is built with TypeScript and provides excellent type safety out of the box:
 
 ```ts
-import { isArray, pick } from 'xfunc'
+import { pick } from 'xfunc'
 
 function processData<T>(data: T) {
-  if (isArray(data)) {
+  if (Array.isArray(data)) {
     // TypeScript knows data is an array here
     return data.map(item => item)
   }
