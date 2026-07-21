@@ -36,7 +36,7 @@ jobs:
       - name: Download Size Data
         uses: dawidd6/action-download-artifact@07ab29fd4a977ae4d2b275087cf67563dfdf0295 # v9
         with:
-          name: size-data
+          name: size-data-${{ github.event.workflow_run.head_branch }}
           run_id: ${{ github.event.workflow_run.id }}
           path: temp/size
 
@@ -58,7 +58,7 @@ jobs:
           branch: ${{ steps.pr-base.outputs.content }}
           workflow: size-data.yml
           event: push
-          name: size-data
+          name: size-data-${{ steps.pr-base.outputs.content }}
           path: temp/size-prev
           if_no_artifact_found: warn
 

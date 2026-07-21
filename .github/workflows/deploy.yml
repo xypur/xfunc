@@ -2,7 +2,7 @@ name: Deploy VitePress site to Pages
 
 on:
   push:
-    branches: [master]
+    branches: [master, dev]
 
   workflow_dispatch:
 
@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -32,17 +32,27 @@ jobs:
           node-version: 22
           cache: pnpm
       - name: Setup Pages
+        if: github.ref == 'refs/heads/master'
         uses: actions/configure-pages@v4
       - name: Install dependencies
         run: pnpm install
       - name: Build with VitePress
         run: pnpm docs:build
-      - name: Upload artifact
+      - name: Upload Pages artifact (master)
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/.vitepress/dist
+      - name: Upload docs artifact (dev)
+        if: github.ref == 'refs/heads/dev'
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-dev
+          path: docs/.vitepress/dist
+          retention-days: 7
 
   deploy:
+    if: github.ref == 'refs/heads/master'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
