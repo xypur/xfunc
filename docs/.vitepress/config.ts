@@ -73,13 +73,13 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/uphg/xfunc' }
+      { icon: 'github', link: 'https://github.com/xypur/xfunc' }
     ],
     search: {
       provider: 'local'
     },
     editLink: {
-      pattern: 'https://github.com/uphg/xfunc/edit/master/docs/:path'
+      pattern: 'https://github.com/xypur/xfunc/edit/master/docs/:path'
     }
   }
 })

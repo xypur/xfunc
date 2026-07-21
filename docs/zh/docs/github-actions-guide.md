@@ -153,7 +153,7 @@ GITHUB_TOKEN=auto_provided        # GitHub API 访问（自动提供）
 ## 工作流特性
 
 ### 安全特性
-- **仓库限制**：所有工作流仅在 `uphg/xfunc` 仓库运行
+- **仓库限制**：所有工作流仅在 `xypur/xfunc` 仓库运行
 - **环境保护**：发布需要 Release 环境权限
 - **权限最小化**：每个工作流仅申请必需权限
 

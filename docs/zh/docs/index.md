@@ -202,10 +202,10 @@ class InfiniteScroll {
 
 ## Next Steps
 
-- 📚 Explore the [complete API reference](/api/)
-- 🎯 Check out more [examples and patterns](/examples/)
-- 🔧 Learn about [advanced usage](/advanced/)
-- 💡 See [best practices](/best-practices/) for production apps
+- 📚 Explore the [complete API reference](/zh/docs/overview)
+- 🎯 Check out more [examples and patterns](/zh/docs/)
+- 🔧 Learn about [advanced usage](/zh/docs/structure)
+- 💡 See [best practices](/zh/docs/github-actions-guide) for production apps
 
 ## TypeScript Support
 
@@ -226,4 +226,4 @@ function processData<T>(data: T) {
 }
 ```
 
-Ready to dive deeper? Check out our [API documentation](/api/) for complete function references and advanced usage patterns.
+Ready to dive deeper? Check out our [API documentation](/zh/docs/overview) for complete function references and advanced usage patterns.

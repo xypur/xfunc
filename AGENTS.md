@@ -1,4 +1,4 @@
-# Unfunt
+# Xfunc
 
 A modern collection of utility functions for TypeScript/JavaScript projects (Vite/pnpm).
 
