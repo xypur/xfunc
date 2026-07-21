@@ -34,7 +34,7 @@ jobs:
         run: pnpm install
 
       - name: Download Size Data
-        uses: dawidd6/action-download-artifact@07ab29fd4a977ae4d2b275087cf67563dfdf0295 # v9
+        uses: dawidd6/action-download-artifact@b6e2e70617bc3265edd6dab6c906732b2f1ae151 # v21
         with:
           name: size-data-${{ github.event.workflow_run.head_branch }}
           run_id: ${{ github.event.workflow_run.id }}
@@ -53,7 +53,7 @@ jobs:
           path: temp/size/base.txt
 
       - name: Download Previous Size Data
-        uses: dawidd6/action-download-artifact@07ab29fd4a977ae4d2b275087cf67563dfdf0295 # v9
+        uses: dawidd6/action-download-artifact@b6e2e70617bc3265edd6dab6c906732b2f1ae151 # v21
         with:
           branch: ${{ steps.pr-base.outputs.content }}
           workflow: size-data.yml
