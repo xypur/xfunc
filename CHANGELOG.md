@@ -1,3 +1,7 @@
+# [0.8.0](https://github.com/xypur/xfunc/compare/v0.7.0...v0.8.0) (2026-07-22)
+
+
+
 # [0.7.0](https://github.com/xypur/xfunc/compare/v0.6.0-beta.1...v0.7.0) (2026-07-22)
 
 

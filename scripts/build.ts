@@ -49,24 +49,25 @@ async function main(argv: minimist.ParsedArgs) {
     const strPackage = JSON.stringify(packageJson, null, 2)
     await fs.writeFile(resolve('./package.json'), strPackage)
     await fs.copy('README.md', resolve('README.md'))
+    await fs.copy('README.zh-CN.md', resolve('README.zh-CN.md'))
     await fs.copy('LICENSE', resolve('LICENSE'))
 
-    // 格式化打包后的代码和类型文件
-    console.log(pc.dim('Formatting output files...'))
-    try {
-      await execa(
-        'pnpm',
-        ['exec', 'eslint', 'dist/**/*.{js,ts,d.ts}', '--fix', '--no-ignore'],
-        { stdio: 'inherit' }
-      )
-      console.log(pc.green('✓') + pc.dim(' Files formatted successfully!'))
-    } catch(error: any) {
-      console.log(
-        pc.yellow('(!)')
-        + pc.dim(' Warning: Some files could not be formatted: ')
-        + pc.red(error.message)
-      )
-    }
+    // 格式化类型文件，方便使用者查看
+    // console.log(pc.dim('Formatting type declaration files...'))
+    // try {
+    //   await execa(
+    //     'pnpm',
+    //     ['exec', 'eslint', 'dist/**/*.d.ts', '--fix', '--no-ignore'],
+    //     { stdio: 'inherit' }
+    //   )
+    //   console.log(pc.green('✓') + pc.dim(' Type declarations formatted successfully!'))
+    // } catch(error: any) {
+    //   console.log(
+    //     pc.yellow('(!)')
+    //     + pc.dim(' Warning: Some type files could not be formatted: ')
+    //     + pc.red(error.message)
+    //   )
+    // }
 
     console.log(pc.green('✓') + pc.bold(' Build completed successfully!'))
   } catch(error: any) {
