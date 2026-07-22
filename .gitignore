@@ -39,6 +39,9 @@ CRUSH.md
 # Publish cache
 .publish-cache.json
 
+# Docs deploy temp
+.gh-pages-tmp
+
 temp
 
 coverage
