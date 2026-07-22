@@ -128,7 +128,7 @@ export async function publicPackages(retryFailed = false) {
         // 发布分包
         step(`\n发布 ${pkg.name}@${targetVersion}...`)
         // await run('pnpm', ['publish', '--no-git-checks', '--access', 'public'], { cwd: packagePath })
-        await run('pnpm', ['publish', '--no-git-checks', '--tag', 'beta', '--access', 'public'], { cwd: packagePath })
+        await run('pnpm', ['publish', '--no-git-checks', '--access', 'public'], { cwd: packagePath })
         console.log(pico.green(`成功发布 ${pkg.name}@${targetVersion}`))
 
         // 如果发布成功，从缓存中移除该包

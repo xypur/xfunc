@@ -1,6 +1,7 @@
 {
   "name": "xfunc-creator",
   "version": "0.7.0",
+  "private": true,
   "packageManager": "pnpm@10.13.1",
   "type": "module",
   "scripts": {
@@ -17,13 +18,9 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "version": "pnpm build && git add dist",
-    "prepublishOnly": "pnpm test:run && pnpm lint:check",
-    "publish": "cd dist && npm publish",
-    "publish:patch": "npm version patch && cd dist && npm publish",
-    "publish:minor": "npm version minor && cd dist && npm publish",
-    "publish:major": "npm version major && cd dist && npm publish",
+    "publish:dist": "cd dist && npm publish",
     "publish:dry": "cd dist && npm pack --dry-run",
-    "publish-packages": "node scripts/publish-packages.ts",
+    "publish:packages": "node scripts/publish-packages.ts",
     "release": "node scripts/release.ts",
     "release:dry": "node scripts/release.ts --dry",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
