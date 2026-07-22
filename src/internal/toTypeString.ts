@@ -1,4 +1,4 @@
-import { ObjectToString } from "./constants";
+import { ObjectToString } from './constants'
 
 /**
  * Gets the full Object.prototype.toString result of a value
