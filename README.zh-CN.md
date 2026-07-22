@@ -1,5 +1,7 @@
 # xfunc
 
+[English](./README.md) | 中文
+
 [![CI](https://github.com/xypur/xfunc/actions/workflows/ci.yml/badge.svg)](https://github.com/xypur/xfunc/actions)
 [![npm](https://img.shields.io/npm/v/xfunc)](https://www.npmjs.com/package/xfunc)
 [![codecov](https://codecov.io/gh/xypur/xfunc/branch/dev/graph/badge.svg)](https://codecov.io/gh/xypur/xfunc)
