@@ -1,10 +1,6 @@
 # [0.8.0](https://github.com/xypur/xfunc/compare/v0.7.0...v0.8.0) (2026-07-22)
 
 
-
-# [0.7.0](https://github.com/xypur/xfunc/compare/v0.6.0-beta.1...v0.7.0) (2026-07-22)
-
-
 ### Features
 
 * add build and publish scripts for npm packages with caching and error handling ([d4060de](https://github.com/xypur/xfunc/commit/d4060de561c4bb3d16b4ceae71ae90f27f160129))
