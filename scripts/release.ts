@@ -61,6 +61,15 @@ const dryRun = async(bin: string, args: ReadonlyArray<string>) => console.log(pi
 const runIfNotDry = isDryRun ? dryRun : run
 const step = (msg: string) => console.log(pico.cyan(msg))
 
+async function checkPublished(packageName: string, version: string): Promise<boolean> {
+  try {
+    const { stdout } = await exec('npm', ['view', `${packageName}@${version}`, 'version'])
+    return stdout.trim() === version
+  } catch {
+    return false
+  }
+}
+
 async function main() {
   let targetVersion = positionals[0]
 
@@ -190,8 +199,12 @@ async function main() {
   // 发布到 npm
   step('\n发布到 npm...')
   if (!isDryRun) {
-    await run('pnpm', ['publish', '--access', 'public', '--no-git-checks'], { cwd: path.resolve(__dirname, '../dist') })
-    console.log(pico.green(`成功发布主包 ${targetVersion}`))
+    if (await checkPublished('xfunc', targetVersion)) {
+      console.log(pico.yellow(`主包 ${targetVersion} 已发布过，跳过`))
+    } else {
+      await run('pnpm', ['publish', '--access', 'public', '--no-git-checks'], { cwd: path.resolve(__dirname, '../dist') })
+      console.log(pico.green(`成功发布主包 ${targetVersion}`))
+    }
 
     // 发布 npm-packages 中的分包
     await run('pnpm', ['publish:packages'])

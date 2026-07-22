@@ -20,6 +20,15 @@ const run = async(
   opts: import('node:child_process').SpawnOptions = {}
 ) => exec(bin, args, { stdio: 'inherit', ...opts })
 
+async function checkPublished(packageName: string, version: string): Promise<boolean> {
+  try {
+    const { stdout } = await exec('npm', ['view', `${packageName}@${version}`, 'version'])
+    return stdout.trim() === version
+  } catch {
+    return false
+  }
+}
+
 // 解析命令行参数
 function parseArgs() {
   const args = process.argv.slice(2)
@@ -125,10 +134,20 @@ export async function publicPackages(retryFailed = false) {
         continue
       }
 
+      // 发布分包
+      step(`\n发布 ${pkg.name}@${targetVersion}...`)
+
+      if (await checkPublished(pkg.name, targetVersion)) {
+        console.log(pico.yellow(`${pkg.name}@${targetVersion} 已发布过，跳过`))
+        if (retryFailed) {
+          const cache = readCache()
+          cache.failedPackages = cache.failedPackages.filter((p: { name: string }) => p.name !== pkg.name)
+          writeCache(cache)
+        }
+        continue
+      }
+
       try {
-        // 发布分包
-        step(`\n发布 ${pkg.name}@${targetVersion}...`)
-        // await run('pnpm', ['publish', '--no-git-checks', '--access', 'public'], { cwd: packagePath })
         await run('pnpm', ['publish', '--no-git-checks', '--access', 'public'], { cwd: packagePath })
         console.log(pico.green(`成功发布 ${pkg.name}@${targetVersion}`))
 
