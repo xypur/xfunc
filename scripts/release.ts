@@ -30,6 +30,9 @@ const { values: args, positionals } = parseArgs({
     },
     skipPrompts: {
       type: 'boolean'
+    },
+    publishOnly: {
+      type: 'boolean'
     }
   }
 })
@@ -39,6 +42,7 @@ const skipTests = args.skipTests
 const skipBuild = args.skipBuild
 const skipGit = args.skipGit
 const skipPrompts = args.skipPrompts
+const publishOnly = args.publishOnly
 
 /** @type {ReadonlyArray<import('semver').ReleaseType>} */
 const versionIncrements: ReadonlyArray<import('semver').ReleaseType> = ['patch', 'minor', 'major']
@@ -60,83 +64,105 @@ const step = (msg: string) => console.log(pico.cyan(msg))
 async function main() {
   let targetVersion = positionals[0]
 
-  if (!targetVersion) {
-    const { release }: { release: string } = await prompt({
-      type: 'select',
-      name: 'release',
-      message: '选择发布类型',
-      choices: versionIncrements
-        .map(i => `${i} (${inc(i)})`)
-        .concat(['custom'])
-    })
-
-    if (release === 'custom') {
-      const result = await prompt({
-        type: 'input',
-        name: 'version',
-        message: '输入自定义版本号',
-        initial: currentVersion
-      }) as { version: string }
-      targetVersion = result.version
-    } else {
-      targetVersion = release.match(/\((.*)\)/)?.[1] ?? ''
-    }
-  }
-
-  if (versionIncrements.includes(targetVersion as import('semver').ReleaseType)) {
-    const newVersion = inc(targetVersion as import('semver').ReleaseType)
-    if (newVersion) {
-      targetVersion = newVersion
-    }
-  }
-
-  if (!semver.valid(targetVersion)) {
-    throw new Error(`无效的目标版本: ${targetVersion}`)
-  }
-
-  if (!skipPrompts) {
-    const { yes: confirmRelease }: { yes: boolean } = await prompt({
-      type: 'confirm',
-      name: 'yes',
-      message: `发布 v${targetVersion}，确认继续？`
-    })
-
-    if (!confirmRelease) {
-      return
-    }
-  }
-
-  step(`发布 v${targetVersion}...`)
-
-  // 运行测试
-  if (!skipTests) {
-    step('\n运行测试...')
-    if (!isDryRun) {
-      await run('pnpm', ['test:run'])
-    } else {
-      console.log('跳过（干运行）')
-    }
+  if (publishOnly) {
+    targetVersion = currentVersion
+    step(`仅发布 v${targetVersion}（跳过版本管理步骤）...`)
   } else {
-    step('跳过测试')
-  }
+    if (!targetVersion) {
+      const { release }: { release: string } = await prompt({
+        type: 'select',
+        name: 'release',
+        message: '选择发布类型',
+        choices: versionIncrements
+          .map(i => `${i} (${inc(i)})`)
+          .concat(['custom'])
+      })
 
-  // 更新版本号
-  step('\n更新版本号...')
-  updateVersion(targetVersion)
+      if (release === 'custom') {
+        const result = await prompt({
+          type: 'input',
+          name: 'version',
+          message: '输入自定义版本号',
+          initial: currentVersion
+        }) as { version: string }
+        targetVersion = result.version
+      } else {
+        targetVersion = release.match(/\((.*)\)/)?.[1] ?? ''
+      }
+    }
 
-  // 变更日志生成
-  step('\nGenerating changelog...')
-  await run('pnpm', ['run', 'changelog'])
+    if (versionIncrements.includes(targetVersion as import('semver').ReleaseType)) {
+      const newVersion = inc(targetVersion as import('semver').ReleaseType)
+      if (newVersion) {
+        targetVersion = newVersion
+      }
+    }
 
-  if (!skipPrompts) {
-    const { yes: changelogOk }: { yes: boolean } = await prompt({
-      type: 'confirm',
-      name: 'yes',
-      message: 'Changelog generated. Does it look good?'
-    })
+    if (!semver.valid(targetVersion)) {
+      throw new Error(`无效的目标版本: ${targetVersion}`)
+    }
 
-    if (!changelogOk) {
-      return
+    if (!skipPrompts) {
+      const { yes: confirmRelease }: { yes: boolean } = await prompt({
+        type: 'confirm',
+        name: 'yes',
+        message: `发布 v${targetVersion}，确认继续？`
+      })
+
+      if (!confirmRelease) {
+        return
+      }
+    }
+
+    step(`发布 v${targetVersion}...`)
+
+    // 运行测试
+    if (!skipTests) {
+      step('\n运行测试...')
+      if (!isDryRun) {
+        await run('pnpm', ['test:run'])
+      } else {
+        console.log('跳过（干运行）')
+      }
+    } else {
+      step('跳过测试')
+    }
+
+    // 更新版本号
+    step('\n更新版本号...')
+    updateVersion(targetVersion)
+
+    // 变更日志生成
+    step('\nGenerating changelog...')
+    await run('pnpm', ['run', 'changelog'])
+
+    if (!skipPrompts) {
+      const { yes: changelogOk }: { yes: boolean } = await prompt({
+        type: 'confirm',
+        name: 'yes',
+        message: 'Changelog generated. Does it look good?'
+      })
+
+      if (!changelogOk) {
+        return
+      }
+    }
+
+    // 构建项目
+    if (!skipGit) {
+      const { stdout } = await run('git', ['diff'], { stdio: 'pipe' })
+      if (stdout) {
+        step('\n提交更改...')
+        await runIfNotDry('git', ['add', '-A'])
+        await runIfNotDry('git', ['commit', '-m', `release: v${targetVersion}`])
+      } else {
+        console.log('没有更改需要提交')
+      }
+
+      step('\n推送到远程仓库...')
+      await runIfNotDry('git', ['tag', `v${targetVersion}`])
+      await runIfNotDry('git', ['push', 'origin', `refs/tags/v${targetVersion}`])
+      await runIfNotDry('git', ['push'])
     }
   }
 
@@ -159,22 +185,6 @@ async function main() {
     await run('pnpm', ['lint:check'])
   } else {
     console.log('跳过（干运行）')
-  }
-
-  if (!skipGit) {
-    const { stdout } = await run('git', ['diff'], { stdio: 'pipe' })
-    if (stdout) {
-      step('\n提交更改...')
-      await runIfNotDry('git', ['add', '-A'])
-      await runIfNotDry('git', ['commit', '-m', `release: v${targetVersion}`])
-    } else {
-      console.log('没有更改需要提交')
-    }
-
-    step('\n推送到远程仓库...')
-    await runIfNotDry('git', ['tag', `v${targetVersion}`])
-    await runIfNotDry('git', ['push', 'origin', `refs/tags/v${targetVersion}`])
-    await runIfNotDry('git', ['push'])
   }
 
   // 发布到 npm
