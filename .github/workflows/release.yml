@@ -14,9 +14,10 @@ jobs:
     if: github.repository == 'xypur/xfunc'
     needs: [test]
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     permissions:
       contents: write
-      id-token: write
     # Use Release environment for deployment protection
     environment: Release
     steps:
@@ -40,8 +41,6 @@ jobs:
         id: publish
         run: |
           pnpm release --publishOnly
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub release
         run: |
