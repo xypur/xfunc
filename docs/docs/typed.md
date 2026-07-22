@@ -300,20 +300,23 @@ isIterable({})
 
 ### Utility Functions
 
-#### `isTypeString(value)`
+#### `isTypeString(value, type)`
 
-Checks if `value` is a type string.
+Checks if `value`'s raw type matches the given type string.
 
 ```ts
 import { isTypeString } from 'xfunc'
 
-isTypeString('string')
+isTypeString('hello', 'String')
 // => true
 
-isTypeString('number')
+isTypeString(42, 'Number')
 // => true
 
-isTypeString(42)
+isTypeString(null, 'Null')
+// => true
+
+isTypeString('hello', 'Number')
 // => false
 ```
 
