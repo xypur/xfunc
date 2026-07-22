@@ -190,7 +190,7 @@ async function main() {
   // 发布到 npm
   step('\n发布到 npm...')
   if (!isDryRun) {
-    await run('pnpm', ['publish', '--access', 'public'], { cwd: path.resolve(__dirname, '../dist') })
+    await run('pnpm', ['publish', '--access', 'public', '--no-git-checks'], { cwd: path.resolve(__dirname, '../dist') })
     console.log(pico.green(`成功发布主包 ${targetVersion}`))
 
     // 发布 npm-packages 中的分包
