@@ -118,10 +118,7 @@ pnpm build       # TypeScript 类型检查
 
 1. **准备发布**：
    ```bash
-   # 更新版本号
-   pnpm version patch|minor|major
-   
-   # 或使用项目脚本
+   # 运行 release 脚本完成版本升级、构建和发布
    pnpm release
    ```
 

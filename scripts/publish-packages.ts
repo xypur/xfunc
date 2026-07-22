@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import pico from 'picocolors'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import { setTimeout } from 'node:timers/promises'
 import { exec } from './lib/exec.ts'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -128,7 +129,7 @@ export async function publicPackages(retryFailed = false) {
         // 发布分包
         step(`\n发布 ${pkg.name}@${targetVersion}...`)
         // await run('pnpm', ['publish', '--no-git-checks', '--access', 'public'], { cwd: packagePath })
-        await run('pnpm', ['publish', '--no-git-checks', '--tag', 'beta', '--access', 'public'], { cwd: packagePath })
+        await run('pnpm', ['publish', '--no-git-checks', '--access', 'public'], { cwd: packagePath })
         console.log(pico.green(`成功发布 ${pkg.name}@${targetVersion}`))
 
         // 如果发布成功，从缓存中移除该包
@@ -137,6 +138,9 @@ export async function publicPackages(retryFailed = false) {
           cache.failedPackages = cache.failedPackages.filter((p: { name: string }) => p.name !== pkg.name)
           writeCache(cache)
         }
+
+        // 等待 3 秒再发布下一个，避免 npm 409 Conflict
+        await setTimeout(3000)
       } catch(error: any) {
         console.log(pico.red(`发布失败 ${pkg.name}@${targetVersion}: ${error.message}`))
         addFailedPackage(pkg.name, targetVersion, error)

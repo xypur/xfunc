@@ -485,32 +485,36 @@ isIterable({})
 
 *(boolean)*: 如果值是可迭代对象返回 true，否则返回 false
 
-## `isTypeString(value)`
+## `isTypeString(value, type)`
 
-检查值是否为类型字符串。
+检查值的原始类型是否与指定的类型字符串匹配。
 
 ### 使用示例
 
 ```ts
 import { isTypeString } from 'xfunc'
 
-isTypeString('string')
+isTypeString('hello', 'String')
 // => true
 
-isTypeString('number')
+isTypeString(42, 'Number')
 // => true
 
-isTypeString(42)
+isTypeString(null, 'Null')
+// => true
+
+isTypeString('hello', 'Number')
 // => false
 ```
 
 ### 参数
 
 1. `value` *(unknown)*: 要检查的值
+2. `type` *(string)*: 要匹配的类型字符串（如 'String', 'Number' 等）
 
 ### 返回值
 
-*(boolean)*: 如果值是类型字符串返回 true，否则返回 false
+*(boolean)*: 如果值的原始类型与指定类型匹配返回 true，否则返回 false
 
 ## `toRawType(value)`
 

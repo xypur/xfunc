@@ -1,7 +1,9 @@
 import { defineConfig } from 'vitepress'
 
+const isDev = process.env.NODE_ENV === 'development'
+
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default () => defineConfig({
   base: '/xfunc/',
   title: 'xfunc',
   description: 'A collection of utility functions for TypeScript/JavaScript',
@@ -31,7 +33,7 @@ export default defineConfig({
           text: 'Getting Started',
           items: [
             { text: 'Quick Start', link: '/docs/' },
-            { text: 'GitHub Actions', link: '/docs/github-actions-guide' }
+            ...(isDev ? [{ text: 'GitHub Actions', link: '/docs/github-actions-guide' }] : [])
           ]
         },
         {
@@ -53,7 +55,7 @@ export default defineConfig({
           text: '开始使用',
           items: [
             { text: '快速开始', link: '/zh/docs/' },
-            { text: 'GitHub Actions', link: '/zh/docs/github-actions-guide' }
+            ...(isDev ? [{ text: 'GitHub Actions', link: '/zh/docs/github-actions-guide' }] : [])
           ]
         },
         {

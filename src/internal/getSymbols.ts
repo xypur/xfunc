@@ -1,5 +1,5 @@
-import { isNil } from "../typed/isNil"
-import { nativeGetSymbols, propertyIsEnumerable } from "./constants"
+import { isNil } from '../typed/isNil'
+import { nativeGetSymbols, propertyIsEnumerable } from './constants'
 
 export function getSymbols(object: unknown) {
   if (isNil(object)) {

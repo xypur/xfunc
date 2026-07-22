@@ -1,3 +1,19 @@
+# [0.8.0](https://github.com/xypur/xfunc/compare/v0.7.0...v0.8.0) (2026-07-22)
+
+
+
+# [0.7.0](https://github.com/xypur/xfunc/compare/v0.6.0-beta.1...v0.7.0) (2026-07-22)
+
+
+### Features
+
+* add build and publish scripts for npm packages with caching and error handling ([d4060de](https://github.com/xypur/xfunc/commit/d4060de561c4bb3d16b4ceae71ae90f27f160129))
+* add build script and configuration for TypeScript project ([25abd9e](https://github.com/xypur/xfunc/commit/25abd9e9aa1a17e58d85f330486d94416f5e2e63))
+* flush method (execute function immediately and reset state). ([a8a4be9](https://github.com/xypur/xfunc/commit/a8a4be9146a0dee0235904f9562e57217ad68b55))
+* implement cloning utilities and enhance object manipulation functions ([90b2ab6](https://github.com/xypur/xfunc/commit/90b2ab6d8d2fff52448d70ca84676d1a233c7a0a))
+* refactor build process and add package generation scripts ([9244f44](https://github.com/xypur/xfunc/commit/9244f44c1720c46c97830d89c954d0e5fd4e7fcd))
+* update build script to TypeScript and enhance exec utilities ([ff2cdc6](https://github.com/xypur/xfunc/commit/ff2cdc639ec85a35eb64e958343042abacb0850a))
+
 # [0.6.0-beta.1](https://github.com/xypur/xfunc/compare/v0.2.0-alpha.1...v0.6.0-beta.1) (2025-12-21)
 
 
